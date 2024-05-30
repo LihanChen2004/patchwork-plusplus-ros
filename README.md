@@ -26,6 +26,7 @@ To build Patchwork++, you can follow below codes.
 
 ```bash
 $ mkdir -p ~/ros2_ws/src
+$ git clone https://github.com/url-kaist/patchwork-plusplus-ros
 $ cd ~/ros2_ws
 $ colcon build --packages-select patchworkpp --symlink-install
 ```
