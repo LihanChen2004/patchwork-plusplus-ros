@@ -755,7 +755,7 @@ void PatchWorkpp<PointT>::estimate_ground(
 }
 
 template<typename PointT> inline
-void PatchWorkpp<PointT>::update_elevation_thr(void)
+void PatchWorkpp<PointT>::update_elevation_thr()
 {
     for (int i=0; i<num_rings_of_interest_; i++)
     {
@@ -1022,12 +1022,11 @@ void PatchWorkpp<PointT>::callbackCloud(const sensor_msgs::msg::PointCloud2::Con
 
 template<typename PointT>
 sensor_msgs::msg::PointCloud2 PatchWorkpp<PointT>::cloud2msg(pcl::PointCloud<PointT> cloud, const rclcpp::Time& stamp, std::string frame_id) {
-    sensor_msgs::msg::PointCloud2 cloud_ROS;
-    pcl::toROSMsg(cloud, cloud_ROS);
-    cloud_ROS.header.stamp.sec = stamp.seconds();
-    cloud_ROS.header.stamp.nanosec = stamp.nanoseconds() - stamp.seconds()*1e9;
-    cloud_ROS.header.frame_id = frame_id_;
-    return cloud_ROS;
+    sensor_msgs::msg::PointCloud2 cloud_ros;
+    pcl::toROSMsg(cloud, cloud_ros);
+    cloud_ros.header.stamp = stamp;
+    cloud_ros.header.frame_id = frame_id_;
+    return cloud_ros;
 }
 
 template<typename PointT> inline
